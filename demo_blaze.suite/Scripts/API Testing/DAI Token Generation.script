@@ -1,0 +1,8 @@
+﻿put {grant_type: "client_credentials", username: "name", password: "passcode", client_id: "id", client_secret:"secret"} into postData
+put "http://localhost:8000/auth/realms/eggplant/protocol/openid-connect/token" into authUrl
+post postData to url authUrl// Access the resource using the access token
+put the access_token of the JSONValue of it into Global accessToken
+put the refresh_token of the JSONValue of it into Global refreshToken
+put "Bearer " before Global accessToken
+put Global accessToken into the suitevariables.daiToken
+

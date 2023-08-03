@@ -1,0 +1,50 @@
+﻿
+to handle FieldFilling
+	params fieldName,fieldValue
+	Click text:fieldName,caseSensitive:true,hotspot:[100,65],SearchRectangle:"Config".screenpart("VerticalMiddle")
+	wait 0.5
+	TypeText fieldValue
+	wait 0.5
+end FieldFilling
+
+to handle HomePageMenu
+	params menu
+	Click text:menu,SearchRectangle:"Config".screenpart("LeftHalf")
+	wait 1
+end HomePageMenu
+
+to handle CloseBrowser
+	TypeText altKey,"f"
+	TypeText "x"
+end CloseBrowser
+
+to handle screenShot 
+	"Config".screenShotRequisite
+	if folder (the Suitevariables.screenShotFolder) exists then 
+		CaptureScreen {Name:the Suitevariables.screenShotFolder&"\"&the Suitevariables.screenShotCount,imageFormat:JPG}
+	else
+		create folder (the Suitevariables.screenShotFolder)
+		CaptureScreen {Name:the Suitevariables.screenShotFolder&"\"&the Suitevariables.screenShotCount,imageFormat:JPG}
+	end if
+	put the Suitevariables.screenShotCount + 1 into the Suitevariables.screenShotCount
+end screenShot
+
+to handle savePasswordPopup 
+	params option		
+	if ImageFound(text:"Save password", waitfor:10, SearchRectangle:"Config".screenpart("TopRightQuadrant")) then Click text:option,SearchRectangle:"Config".screenpart("TopRightQuadrant")			
+end savePasswordPopup
+
+to handle connectSUT 
+	params sutName
+	if sutName is not empty then
+		Connect sutName
+		if imageFound(0, text:"Logon Notice",waitfor:10) then 
+			TypeText return
+		end if
+		if imageFound(0, text:"Manager",waitfor:10) then 
+			TypeText return
+		end if
+	else 
+		LogError "Provide sutName"
+	end if
+end connectSUT

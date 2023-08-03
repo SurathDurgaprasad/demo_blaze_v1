@@ -1,0 +1,48 @@
+{
+	"originalcapturelocation": [
+		787,
+		192,
+		39,
+		45
+	],
+	"lastmodifieddate": 1687173500.5910001,
+	"createddate": 1687173500.5910001,
+	"name": "PlayButton/PlayButton2",
+	"lastfounddate": 1687173500.832,
+	"ocrcapturestring": "►",
+	"lastfoundlocation": [
+		787,
+		192,
+		39,
+		45
+	],
+	"testlocationdata": [
+		{
+				"connectionportnum": 3389,
+				"properties": {
+					"CropRectangle": "[0,0,0,0]",
+					"Rotate": 0,
+					"Scale": "    1",
+					"HotSpot": "[19,22]",
+					"Tolerance": "_45",
+					"Discrepancy": "_0",
+					"SearchType": "Tolerant of Background"
+				},
+				"sutinfo": {
+					"type": "Unknown RDP"
+				},
+				"name": "PlayButton/PlayButton2.png",
+				"connectionname": "171",
+				"type": 1,
+				"connectionserverid": "192.168.1.171",
+				"capturerect": [
+					787,
+					192,
+					39,
+					45
+				],
+				"connectiontype": "RDP",
+				"capturedocrtext": "►"
+			}
+	]
+}

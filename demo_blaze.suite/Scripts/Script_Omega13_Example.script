@@ -1,0 +1,8 @@
+﻿
+Start Using omega13
+repeat 5 times 
+	Click Image:"HI"
+end repeat
+Stop Using omega13
+
+

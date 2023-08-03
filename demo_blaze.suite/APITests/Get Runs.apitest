@@ -1,0 +1,29 @@
+{
+    URLparameters = (
+	{
+	    checkedNumber = <*BY>;
+	    param = "";
+	    showCheckedNumber = <*BY>;
+	    value = "";
+	}
+    );
+    authenticationType = None;
+    httpVerb = GET;
+    oauth1Token = "";
+    password = "";
+    requestBody = "{
+\"execution_type\":\"executing\"
+\"model_id\":\"22646c97-d55d-4ed0-b297-119a58dc05e9\"
+
+
+}";
+    requestBodyFormat = "JSON (application/json)";
+    requestHeaders = "<![CDATA[Authorization:[[daiToken]]
+Content-Type:application/json
+]]>";
+    requests = "";
+    testResults = "";
+    testScript = "";
+    url = "http://localhost:8000/ai/runs";
+    userName = "";
+}

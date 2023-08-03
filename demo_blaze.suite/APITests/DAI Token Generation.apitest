@@ -1,0 +1,27 @@
+{
+    URLparameters = (
+	{
+	    checkedNumber = <*BY>;
+	    param = "";
+	    showCheckedNumber = <*BY>;
+	    value = "";
+	}
+    );
+    authenticationType = None;
+    httpVerb = POST;
+    oauth1Token = "";
+    password = "";
+    requestBody = "{
+\"grant_type\":\"client_credentials\"
+\"client_id\":\"client:dai:api:integration:f344180d-c2dc-48bd-9044-f78b09816894\"
+\"client_secret\":\"0ETHyNtbxmNgvEBnAw4H7IHTWL7JJikJ\"
+}";
+    requestBodyFormat = "JSON (application/json)";
+    requestHeaders = "<![CDATA[Content-Type:application/x-www-form-urlencoded
+]]>";
+    requests = "";
+    testResults = "";
+    testScript = "";
+    url = "http://localhost:8000/auth/realms/eggplant/protocol/openid-connect/token";
+    userName = "";
+}

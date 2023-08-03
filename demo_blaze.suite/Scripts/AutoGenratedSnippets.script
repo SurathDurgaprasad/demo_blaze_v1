@@ -1,0 +1,104 @@
+(*** Autosnippet script "testdrdl" generated 2023-06-20 by DurgaPrasad S. Keep this comment for use with Eggplant AI. ***)
+(* Already generated snippets can be edited in the script below *)
+(* To customize the snippet generation templates, affecting snippets generated in the future,
+go to Eggplant > Preferences... > Script > General > Customize *)
+
+
+(* Autosnippets for Button "ContactsButton" *)
+
+to handle ContactsButton_Click
+    Click imageName:"ContactsButton", waitFor:8
+end ContactsButton_Click
+
+-----------------------------------
+
+
+(* Autosnippets for Button "FavoritesButton" *)
+
+to handle FavoritesButton_Click
+    Click imageName:"FavoritesButton", waitFor:8
+end FavoritesButton_Click
+
+-----------------------------------
+
+
+(* Autosnippets for Button "HistoryButton" *)
+
+to handle HistoryButton_Click
+    Click imageName:"HistoryButton", waitFor:8
+end HistoryButton_Click
+
+-----------------------------------
+
+
+(* Autosnippets for Button "DownloadsButton" *)
+
+to handle DownloadsButton_Click
+    Click imageName:"DownloadsButton", waitFor:8
+end DownloadsButton_Click
+
+-----------------------------------
+
+
+(* Autosnippets for Checkpoint "Wifi Indicator" *)
+
+to handle Wifi_Indicator_Validate duration
+    if duration is not a number then set duration to 8
+    WaitFor duration, imageName:"Wifi Indicator"
+end Wifi_Indicator_Validate
+
+to handle Wifi_Indicator_IsFound duration
+    if duration is not a number then set duration to 8
+    return imageFound(imageName:"Wifi Indicator", waitFor:duration)
+end Wifi_Indicator_IsFound
+
+-----------------------------------
+
+
+(* Autosnippets for Checkpoint "Clock" *)
+
+to handle Clock_Validate duration
+    if duration is not a number then set duration to 8
+    WaitFor duration, imageName:"Clock"
+end Clock_Validate
+
+to handle Clock_IsFound duration
+    if duration is not a number then set duration to 8
+    return imageFound(imageName:"Clock", waitFor:duration)
+end Clock_IsFound
+
+-----------------------------------
+
+
+(* Autosnippets for Checkpoint "Battery Indicator" *)
+
+to handle Battery_Indicator_Validate duration
+    if duration is not a number then set duration to 8
+    WaitFor duration, imageName:"Battery Indicator"
+end Battery_Indicator_Validate
+
+to handle Battery_Indicator_IsFound duration
+    if duration is not a number then set duration to 8
+    return imageFound(imageName:"Battery Indicator", waitFor:duration)
+end Battery_Indicator_IsFound
+
+-----------------------------------
+
+
+(* Autosnippets for Checkpoint "Screen Text" *)
+
+to handle Screen_Text_Validate duration
+    if duration is not a number then set duration to 8
+    WaitFor duration, imageName:"Screen Text"
+end Screen_Text_Validate
+
+to handle Screen_Text_IsFound duration
+    if duration is not a number then set duration to 8
+    return imageFound(imageName:"Screen Text", waitFor:duration)
+end Screen_Text_IsFound
+
+-----------------------------------
+
+
+(*** End of Autosnippet script testdrdl.script ***)
+

@@ -1,0 +1,5 @@
+﻿"ApplicationHandlers".LaunchApplication
+"ApplicationHandlers".ClickAboutUs
+"ApplicationHandlers".ClickPlay
+"ApplicationHandlers".ClickClose
+"CommonHandlers".CloseBrowser
