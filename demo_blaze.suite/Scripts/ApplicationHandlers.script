@@ -1,0 +1,249 @@
+﻿to LaunchApplication 
+	(*//Connecting SUT
+	"CommonHandlers".connectSUT {sutName:"171"} by name
+	Wait 5*)
+	
+	//Opening run window
+	TypeText windowsKey,"r"
+	set the SearchRectangle to "Config".screenpart("BottomLeftQuadrant")
+	WaitForAll 20, {text:"Run"}, {text:"Ok"}, {text:"Cancel"}
+	set the SearchRectangle to empty
+	
+	//Entering the Web application URL
+	TypeText "chrome https://www.demoblaze.com/",return
+	wait 1
+	set the SearchRectangle to "Config".screenpart("TopHalf")
+	WaitForAll 20, {text:"PRODUCT STORE"}, {text:"Cart"}, {text:"Home"}
+	set the SearchRectangle to empty
+	"CommonHandlers".screenShot
+end LaunchApplication
+
+to ClickHome
+	Click text:"Home",SearchRectangle:"Config".screenpart("TopHalfOfTopHalf")
+	set the SearchRectangle to "Config".screenpart("LeftHalf")
+	WaitForAll 20, {text:"Phones"}, {text:"Laptop"}, {text:"Monitors"}
+	set the SearchRectangle to empty
+	"CommonHandlers".screenShot
+end ClickHome
+
+//About us popup handling
+to ClickAboutUs
+	if ImageFound(text:"About Us",SearchRectangle:"Config".screenpart("TopHalfOfTopHalf")) then 
+		Click FoundImageLocation()
+	else if ImageFound(Text:"About Us", contrastColor:[0,114,170], contrast:"On", WaitFor:8, contrastTolerance:"45") then 
+		Click FoundImageLocation()
+	end if
+	wait 1
+	if ImageFound(text:"About Us",SearchRectangle:"Config".screenpart("TopHalfOfVerticalMiddle")) then Log "About Us Popup is displayed." else LogError "About Us Popup is not displayed."
+	"CommonHandlers".screenShot
+end ClickAboutUs
+
+to ClickPlay
+	if ImageFound(Image:"PlayButton",SearchRectangle:"Config".screenpart("TopHalfOfVerticalMiddle")) then Click Image:"PlayButton",SearchRectangle:"Config".screenpart("TopHalfOfVerticalMiddle")
+	wait 1
+	if not ImageFound(Image:"PlayButton",SearchRectangle:"Config".screenpart("TopHalfOfVerticalMiddle")) then Log "Video is playing." else LogError "Video is failed to play."
+	"CommonHandlers".screenShot
+end ClickPlay
+
+to ClickClose 
+	if ImageFound(text:"Close",SearchRectangle:"Config".screenpart("Center")) then 	
+		Click text:"Close",SearchRectangle:"Config".screenpart("Center") 
+	else if ImageFound(0,text:"Close",SearchRectangle:"Config".screenpart("BottomHalfOfVerticalMiddle")) then 
+		Click text:"Close",SearchRectangle:"Config".screenpart("BottomHalfOfVerticalMiddle")
+	end if
+	wait 1
+	if not ImageFound(1,text:"Close",SearchRectangle:"Config".screenpart("Center")) then Log "Popup is Closed." else LogError "Popup is failed to Close."
+end ClickClose
+
+to ValidateVideoIsPlaying
+	if not ImageFound(Image:"PlayButton",SearchRectangle:"Config".screenpart("TopHalfOfVerticalMiddle")) then Log "Video is playing." else LogError "Video is failed to play."
+	"CommonHandlers".screenShot
+end ValidateVideoIsPlaying
+
+//Contact Popup handling 
+to ClickContact
+	if ImageFound(text:"Contact",SearchRectangle:"Config".screenpart("TopHalfOfTopHalf")) then 
+		Click FoundImageLocation()
+	else if ImageFound(Text:"Contact", contrastColor:[0,114,170], contrast:"On", WaitFor:8, contrastTolerance:"45") then 
+		Click FoundImageLocation()
+	end if
+	wait 1
+	if ImageFound(text:"New message",SearchRectangle:"Config".screenpart("TopHalfOfVerticalMiddle")) then Log "Contact Popup is displayed."
+	"CommonHandlers".screenShot
+end ClickContact
+
+to ContactEmailFieldFilling
+	params Email
+	"CommonHandlers".FieldFilling{fieldName:"Contact Email",fieldValue:Email} by name
+end ContactEmailFieldFilling
+
+to ContactNameFieldFilling
+	params Name
+	"CommonHandlers".FieldFilling{fieldName:"Contact Name",fieldValue:Name} by name
+end ContactNameFieldFilling
+
+to MessageFieldFilling
+	params msg
+	"CommonHandlers".FieldFilling{fieldName:"Message",fieldValue:msg} by name
+end MessageFieldFilling
+
+to ClickSendMessage 
+	Click text:"Send message",SearchRectangle:"Config".screenpart("Center")
+	wait 1
+end ClickSendMessage
+
+to ValidateContactSuccesfulMessage
+	If ImageFound(text:"Thanks for the message",SearchRectangle:"Config".screenpart("TopHalfOfTopHalf")) then
+		Log "'Thanks for the message!!' message is displayed." 
+		"CommonHandlers".screenShot
+		Click Image:"OK"
+	else
+		LogError  "'Thanks for the message!!' message is not displayed."
+		"CommonHandlers".screenShot
+	end if	
+end ValidateContactSuccesfulMessage
+
+//Home Page Menu
+to ClickPhones
+	"CommonHandlers".HomePageMenu {menu:"Phones"} by name
+end ClickPhones
+
+to ClickLaptops
+	"CommonHandlers".HomePageMenu {menu:"Laptops"} by name
+end ClickLaptops
+
+to ClickMonitors
+	"CommonHandlers".HomePageMenu {menu:"Monitors"} by name
+end ClickMonitors
+
+//Handlers to fill the Signup and Login Popup
+to UserNameFieldFilling
+	params user
+	"CommonHandlers".FieldFilling{fieldName:"Username",fieldValue:user} by name
+end UserNameFieldFilling
+
+to PasswordFieldFilling
+	params password
+	"CommonHandlers".FieldFilling{fieldName:"Password",fieldValue:password} by name
+end PasswordFieldFilling
+
+to ClickSignUp 
+	Click text:"Sign Up",ignoreSpaces:true,SearchRectangle:"Config".screenpart("TopHalfOfTopHalf")
+	wait 1
+end ClickSignUp
+
+to ClickSignUpButton
+	Click text:"Sign Up",SearchRectangle:"Config".screenpart("Center")
+	wait 1
+end ClickSignUpButton
+
+to ValidateSignupSuccesfulMessage
+	If ImageFound(text:"Sign up successful",SearchRectangle:"Config".screenpart("TopHalfOfTopHalf")) then
+		Log "'Sign up successful' message is displayed." 
+		"CommonHandlers".screenShot
+		Click Image:"OK"
+	else
+		LogError  "'Sign up successful' message is not displayed."
+		"CommonHandlers".screenShot
+	end if	
+end ValidateSignupSuccesfulMessage
+
+to ClickLogIn
+	Click text:"Log In",ignoreSpaces:true,SearchRectangle:"Config".screenpart("TopHalfOfTopHalf")
+	WaitFor 20,{text:"Log In",SearchRectangle:"Config".screenpart("TopHalfOfVerticalMiddle")}
+end ClickLogIn
+
+to ClickLogInButton
+	Click text:"Log In",ignoreSpaces:true,SearchRectangle:"Config".screenpart("Center")
+	wait 1
+end ClickLogInButton
+
+to ChangePasswordPopup
+	If ImageFound(text:"Change your password",SearchRectangle:"Config".screenpart("TopHalfOfTopHalf")) then
+		Log "'Change your password' message is displayed." 
+		"CommonHandlers".screenShot
+		Click Image:"OK"
+	else
+		Log "'Change your password' message is not displayed."
+		"CommonHandlers".screenShot
+	end if	
+end ChangePasswordPopup
+
+to ValidateSuccesfulLogIn
+	ChangePasswordPopup
+	"CommonHandlers".savePasswordPopup{option:"Never"} by name
+	If ImageFound(text:"Welcome",SearchRectangle:"Config".screenpart("TopHalfOfTopHalf")) then
+		Log "User has successfully Logged In." 
+	else
+		LogError  "User has failed to Log In"
+	end if
+	"CommonHandlers".screenShot
+end ValidateSuccesfulLogIn
+
+//Adding Product 
+to ClickOnProduct
+	params ProductName
+	if ImageFound(2,text:ProductName,SearchRectangle:"Config".screenpart("HorizontalMiddle")) then 
+		Click FoundImageLocation() 
+	else
+		repeat until ImageFound(2,text:ProductName,SearchRectangle:"Config".screenpart("HorizontalMiddle"))
+			ScrollWheelDown 5
+			Click {text:ProductName,SearchRectangle:"Config".screenpart("HorizontalMiddle")}
+			if repeatIndex() > 5 then LogError "Product is not found on the screen."
+		end repeat		
+	end if
+end ClickOnProduct
+
+to ClickAddtoCart
+	Click {text:"Add to Cart",SearchRectangle:"Config".screenpart("HorizontalMiddle")}
+	wait 1
+end ClickAddtoCart 
+
+to ValidateProductAddedSuccesfulMessage
+	If ImageFound(text:"Product added",SearchRectangle:"Config".screenpart("TopHalfOfTopHalf")) then
+		Log "'Product added.' message is displayed."
+		"CommonHandlers".screenShot
+		Click Image:"OK"		
+	else
+		LogError  "'Product added.' message is not displayed."
+		"CommonHandlers".screenShot
+	end if
+end ValidateProductAddedSuccesfulMessage
+
+//Cart Page
+to ClickCart
+	Click text:"Cart",ignoreSpaces:true,SearchRectangle:"Config".screenpart("TopHalfOfTopHalf")
+	WaitForAll 20,{text:"Products",SearchRectangle:"Config".screenpart("TopLeftQuadrant")},{text:"Total",SearchRectangle:"Config".screenpart("TopRightQuadrant")}
+	If ImageFound(text:"Products",SearchRectangle:"Config".screenpart("TopLeftQuadrant")) then Log "Navigated into Cart Page." else  LogError "Failed to Navigat into Cart Page."
+end ClickCart
+
+to ClickPlaceOrder
+	Click text:"Place Order",ignoreSpaces:true,SearchRectangle:"Config".screenpart("TopRightQuadrant")
+	WaitForAll 20,{text:"Name",SearchRectangle:"Config".screenpart("VerticalMiddle")},{text:"Country",SearchRectangle:"Config".screenpart("VerticalMiddle")},{text:"Credit card",SearchRectangle:"Config".screenpart("VerticalMiddle")}
+	If ImageFound(text:"Credit card",SearchRectangle:"Config".screenpart("VerticalMiddle")) then Log "Place order Form is opened." else  LogError "Place order Form is failed to open."
+	"CommonHandlers".screenShot
+end ClickPlaceOrder
+
+to FillPlaceOrderForm
+	"CommonHandlers".FieldFilling{fieldName:"Name",fieldValue:"User1"} by name
+	"CommonHandlers".FieldFilling{fieldName:"Country",fieldValue:"India"} by name
+	"CommonHandlers".FieldFilling{fieldName:"City",fieldValue:"Hyderabad"} by name
+	"CommonHandlers".FieldFilling{fieldName:"Credit card",fieldValue:"123456789"} by name
+	"CommonHandlers".FieldFilling{fieldName:"Month",fieldValue:"01"} by name
+	"CommonHandlers".FieldFilling{fieldName:"Year",fieldValue:"2000"} by name
+end FillPlaceOrderForm
+
+to ClickPurchase
+	if ImageFound(text:"Purchase",SearchRectangle:"Config".screenpart("VerticalMiddle")) then 
+		Click FoundImageLocation()
+	else 
+		ScrollWheelDown 8
+		Click text:"Purchase",ignoreSpaces:true,SearchRectangle:"Config".screenpart("VerticalMiddle")
+	end if
+end ClickPurchase
+
+to ValidatePurchaseConfirmation
+	If ImageFound(2,text:"Thank you for your purchase",SearchRectangle:"Config".screenpart("Center"),waitfor:5) then Log "Purchase confirmation is displayed." else  LogError "Purchase confirmation is not displayed."
+	"CommonHandlers".screenShot
+	Click Image:"OK",SearchRectangle:"Config".screenpart("Center")
+end ValidatePurchaseConfirmation

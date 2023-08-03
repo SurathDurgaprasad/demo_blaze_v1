@@ -1,0 +1,54 @@
+﻿function screenpart portion(*  *)
+	try				
+		set AdressBar to 0.063  --without tab and address bar		
+		set taskBar to 0.965  --without the taskbar
+		set screenPortions to {			
+			FullScreen:[[0,AdressBar],[1,taskBar]],
+			TopHalf: [[0,AdressBar],[1,.5]],
+			BottomHalf: [[0,.5],[1,taskBar]],
+			LeftHalf: [[0,AdressBar],[.5,taskBar]],
+			RightHalf: [[.5,AdressBar],[1,taskBar]],
+			HorizontalMiddle: [[0,.25],[1,.75]],
+			VerticalMiddle:[[.25,AdressBar],[.75,taskBar]],
+			TopLeftQuadrant:[[0,AdressBar],[.5,.5]],			
+			TopRightQuadrant:[[.5,AdressBar],[1,.5]],
+			BottomLeftQuadrant:[[0,.5],[.5,taskBar]],
+			BottomRightQuadrant:[[.5,.5],[1,taskBar]],
+			Center:[[.25,.20],[.75,.75]],			
+			TopHalfOfTopHalf: [[0,AdressBar],[1,.25]],
+			BottomHalfOfTopHalf:[[0,.25],[1,.5]],
+			TopHalfOfBottomHalf: [[0,.5],[1,.75]],			
+			BottomHalfOfBottomHalf: [[0,.75],[1,taskBar]],
+			LeftHalfOfLeftHalf: [[0,AdressBar],[.25,taskBar]],
+			RightHalfOfLeftHalf: [[.25,AdressBar],[.5,taskBar]],
+			LeftHalfOfRightHalf: [[.5,AdressBar],[.75,taskBar]],
+			RightHalfOfRightHalf: [[.75,AdressBar],[1,taskBar]],
+			LeftHalfOfTopLeftQuadrant:[[0,AdressBar],[.25,.5]],
+			RightHalfOfTopLeftQuadrant:[[.25,AdressBar],[.5,.5]],
+			LefttHalfOfTopRightQuadrant:[[.5,AdressBar],[.75,.5]],
+			RightHalfOfTopRightQuadrant:[[.725,AdressBar],[1,.5]],
+			LeftHalfOfBottomLeftQuadrant:[[0,.5],[.25,taskBar]],
+			RightHalfOfBottomLeftQuadrant:[[.25,.5],[.5,taskBar]],
+			LeftHalfOfBottomRightQuadrant:[[.5,.5],[.75,taskBar]],
+			RightHalfOfBottomRightQuadrant:[[.75,.5],[1,taskBar]],
+			LeftHalfOfHorizontalMiddle: [[0,.25],[.5,.75]],
+			RightHalfOfHorizontalMiddle: [[.5,.25],[1,.75]],
+			TopHalfOfVerticalMiddle:[[.25,AdressBar],[.75,.5]],
+			BottomHalfOfVerticalMiddle:[[.25,.5],[.75,taskBar]],	
+		}
+		set multiplier to screenPortions.(portion)
+		if multiplier is empty then throw "Parameter error", portion && "is not a recognized screen portion."
+		return [the remoteScreenSize,the remotescreenSize] * multiplier
+	Catch theException
+		"CommonUtilities/ErrorMessageHandler".userFriendlymessage theException
+	End try
+End screenpart
+
+to handle screenShotRequisite		
+	put the date into currentExecutionDate
+	replace every occurrence of "/" from currentExecutionDate with "-"
+	put the time into currentExecutionTime
+	replace every occurrence of ":" from currentExecutionTime with "-"
+	replace every occurrence of space from currentExecutionTime with "-"
+	set the Suitevariables.screenShotFolder to the suiteinfo.path&"/AllscreenShots"&"/"&Global testcaseName&"/"&currentExecutionDate&"/"&currentExecutionTime
+end screenShotRequisite
